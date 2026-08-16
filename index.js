@@ -1,8 +1,13 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const swaggerUi = require('swagger-ui-express')
+// const swaggerJsdoc = require('swagger-jsdoc')
+const swaggerDocument = require('./openapi.json') 
 
 app.use(express.json())
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 const tasks = [
   { id: 1, title: 'Attend class', done: false },
@@ -65,7 +70,7 @@ app.put('/tasks/:id', (req,res)=>{
     item.id === id
 )
 
-  if (!task_index) {
+  if (task_index === -1) {
     return res.status(404).json({ error: `Unknown ${id}` })
   }
 
@@ -80,7 +85,7 @@ app.put('/tasks/:id', (req,res)=>{
   }
   if(done!==undefined )
   {
-      tasks[task_index].title=title
+      tasks[task_index].title=done
   }
       res.status(200).json(tasks[task_index])
 })
