@@ -32,6 +32,13 @@ app.get("/tasks/:id", (req, res) => {
   res.json(task)
 })
 
+app.get('/health', (req, res) => {
+  res.json({
+    status: "ok"
+  })
+})
+
+
 app.post('/tasks', (req, res) => {
   const { title } = req.body
 
@@ -52,11 +59,48 @@ app.post('/tasks', (req, res) => {
   res.status(201).json(newTask)
 })
 
-app.get('/health', (req, res) => {
-  res.json({
-    status: "ok"
-  })
+app.put('/tasks/:id', (req,res)=>{
+  const id = Number(req.params.id)
+  const task_index = tasks.findIndex(item =>
+    item.id === id
+)
+
+  if (!task_index) {
+    return res.status(404).json({ error: `Unknown ${id}` })
+  }
+
+  const { done } = req.body
+  const title = req.body.title?.trim()
+  if(!title || !done){
+    console.log("4")
+    return res.status(400).json({ error: 'Empty/Invalid body' })
+  }
+   if(title){
+      tasks[task_index].title=title
+  }
+  if(done!==undefined )
+  {
+      tasks[task_index].title=title
+  }
+      res.status(200).json(tasks[task_index])
 })
+
+app.delete('/tasks/:id',(req,res)=>{
+  const id = Number(req.params.id)
+  const task_index = tasks.findIndex(item =>
+    item.id === id
+)
+
+  if (task_index===-1) {
+    return res.status(404).json({ error: `Unknown ${id}` })
+  }
+
+  tasks.splice(task_index,1);
+  res.status(204).send()
+
+  
+})
+
 
 app.listen(port, () => {
   console.log(` listening on port ${port}`);
