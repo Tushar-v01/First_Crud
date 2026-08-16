@@ -81,15 +81,6 @@ http://localhost:3000/docs
 ```bash
 $ curl -i http://localhost:3000/tasks
 
-HTTP/1.1 200 OK
-X-Powered-By: Express
-Content-Type: application/json; charset=utf-8
-Content-Length: 151
-ETag: W/"97-nKPKgd3j7/7t8yMa/Q0qThYGzEY"
-Date: Sun, 16 Aug 2026 13:21:27 GMT
-Connection: keep-alive
-Keep-Alive: timeout=5
-
 [
   { "id": 1, "title": "Attend class", "done": false },
   { "id": 2, "title": "Complete A crud application", "done": true },
