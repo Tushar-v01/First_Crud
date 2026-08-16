@@ -19,11 +19,10 @@ A simple REST API built with Node.js and Express to manage tasks. Supports full 
 
 ```bash
 # clone the repo
-git clone https://github.com/Tushar-v01/your-repo-name.git
+git clone https://github.com/Tushar-v01/First_Crud.git
 
 # go into the folder
-cd your-repo-name
-
+cd First_Crud
 # install dependencies
 npm install
 ```
